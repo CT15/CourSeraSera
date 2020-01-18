@@ -15,17 +15,15 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-let goToCourseraBtn = document.getElementById("my-btn")
+let goToCourseraBtn = document.getElementById("gotocoursera")
 goToCourseraBtn.onclick = function(element) {
   chrome.tabs.create({"url": "https://www.coursera.org/"})
   return false
 }
 
-function toggleShow() {
-  var inputToggle = document.querySelector('[data-toggle-switch]');
-  if (inputToggle.checked === false) {
-    // do something
-  } else {
-    // do other things (might need to send to background)
-  }
+let analyseBtn = document.getElementById("analyse")
+analyseBtn.onclick = function(element) {
+  chrome.runtime.sendMessage({
+    msg: "analyse" 
+  })
 }

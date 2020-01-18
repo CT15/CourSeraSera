@@ -12,12 +12,12 @@
     color: #0F4D92;
 }
 
-#my-btn:hover {
+.my-btn:hover {
     letter-spacing: 0.7em;
     background-color: #0F4D92;
 }
   
-#my-btn {
+.my-btn {
     color: white;
 }
 
