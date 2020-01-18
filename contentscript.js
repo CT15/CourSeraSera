@@ -1,7 +1,15 @@
-main();
-
+console.log('hello');
+var loadfunction = window.onload;
+window.onload = function(event){
+    //enter here the action you want to do once loaded
+    setTimeout(main(), 5000);
+    if(loadfunction) loadfunction(event);
+}
 function main(){
+
+    console.log("in main");
     let threadDetails = document.getElementsByClassName('rc-ThreadDetail');
+    console.log(threadDetails[0]);
     let threadId = threadDetails[0].childNodes[0].getAttribute('id').trim();
     console.log("The thread ID is ", threadId);
 
