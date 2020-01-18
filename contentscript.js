@@ -1,15 +1,13 @@
-console.log('hello');
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.msg === "execute") {
-            console.log("receive execute command. Executing main");
             main();
+            sendResponse({farewell: "goodbye"});
         }
     }
 )
 
 function main(){
-    console.log("in main");
     let threadDetails = document.getElementsByClassName('rc-ThreadDetail');
     console.log(threadDetails[0]);
     let threadId = threadDetails[0].childNodes[0].getAttribute('id').trim();
@@ -38,7 +36,19 @@ function main(){
     };
     const url = "localhost:5000/predict";
     let data = JSON.stringify(postData);
-    
+    var request = new Request(url , {
+        method: 'POST', 
+        data: data,
+        headers: new Headers({
+        'Application-Json': 'text/plain'
+        })
+        
+    });
+    fetch(request).then(function(resp) {
+        console.log('Logging response...')
+        console.log(resp);
+      });
+    /*
     $.ajax({
         type:"POST",
         url: url,
@@ -52,5 +62,6 @@ function main(){
             console.log(data["prediction"]);
         }
     });
+    */
 }
 

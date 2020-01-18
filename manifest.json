@@ -2,7 +2,7 @@
   "name": "Coursera Extension",
   "version": "1.0",
   "description": "Helping Coursera instructors to identify important forum posts to intervene",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
   "background": {
   	"scripts": ["background.js"],
   	"persistent": false

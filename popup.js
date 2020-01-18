@@ -25,5 +25,6 @@ let analyseBtn = document.getElementById("analyse")
 analyseBtn.onclick = function(element) {
   chrome.runtime.sendMessage({
     msg: "analyse" 
-  })
+  });
+  return false;
 }
