@@ -1,5 +1,13 @@
 console.log('hello');
-main();
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if (request.msg === "execute") {
+            console.log("receive execute command. Executing main");
+            main();
+        }
+    }
+)
+
 function main(){
     console.log("in main");
     let threadDetails = document.getElementsByClassName('rc-ThreadDetail');

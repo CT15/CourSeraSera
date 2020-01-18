@@ -21,3 +21,13 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 */
 
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.msg === "analyse") {
+      chrome.runtime.sendMessage({
+        msg: "execute"
+      });
+      console.log("execute command broadcasted");
+    }
+  }
+);
