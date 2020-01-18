@@ -1,3 +1,35 @@
+.bg-gradient {
+    background-color: #00d2ff;
+    background-image: linear-gradient(to right, #00d2ff 0%, #3a7bd5 100%);
+    box-shadow: 2px 2px 10px rgba(57, 123, 213, 0.36)
+}
+.rounded-pill {
+    border-radius: 50rem!important;
+}
+.progress {
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 1em;
+    height: 1rem;
+    overflow: hidden;
+    font-size: .75rem;
+    background-color: #e9ecef;
+    border-radius: .25rem;
+}
+.progress-bar {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #007bff;
+    transition: width .6s ease;
+}
+/*
 .progressbar {
     display: inline-block;
     width: 100px;
@@ -33,3 +65,4 @@
     color: #aaa;
     margin-top: 12px;
 }
+*/

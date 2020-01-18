@@ -11,7 +11,8 @@
     {
       "matches": ["https://www.coursera.org/learn/*/discussions/weeks/*/threads/*"],
       "run_at": "document_end",
-      "js": ["contentscript.js"]
+      "js": ["contentscript.js"],
+      "css": ["progressbar.css"]
     }
   ],
   "browser_action": {

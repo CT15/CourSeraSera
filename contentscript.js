@@ -1,3 +1,14 @@
+// Get HTML head element 
+var head = document.getElementsByTagName('head')[0];  
+// Create new link Element 
+var link = document.createElement('link'); 
+// set the attributes for link element  
+link.rel = 'stylesheet';  
+link.type = 'text/css'; 
+link.href = 'progressbar.css';  
+
+// Append link element to HTML head 
+head.appendChild(link);
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.msg === "execute") {
@@ -14,21 +25,14 @@ function main(){
     console.log("The thread ID is ", threadId);
 
     let postArray = [];
-    // let rolesArray = []; //"Teaching Staff" or "Learner"
     let postContents = document.getElementsByClassName('rc-CML styled');
-    //let profiles = document.getElementsByClassName('rc-ProfileArea');
 
     let role = "";
     let postContent = "";
     for (let i = 0; i < postContents.length; i++) {
         postContent = postContents[i].textContent;
         console.log(postContent);
-        //let roleAttribute = profiles[i].childNodes[0].getAttribute('aria-label');
-        //roleAttribute = roleAttribute.slice(roleAttribute.indexOf("Role: ") + "Role: ".length);
-        //role = roleAttribute.slice(0, -1);
-        //console.log(role);
         postArray.push(postContent);
-        //rolesArray.push(role);
     } 
 
     /*
@@ -70,60 +74,17 @@ function main(){
             console.log("Fetch error: " + error);
         });
     */
-    
-    let profileNames = document.getElementsByClassName('profileNames');
+    let profileNames = document.getElementsByClassName('rc-ProfileName');
     for (let i = 0; i < profileNames.length; i++) {
-        let metadata = profileNames[i].parentElement.parentElement;
+        console.log("hello");
+        let metadata = profileNames[i].parentElement;
         let data_percent = receivedData[i].toFixed(2)*100;
-        let htmltemp = '<div class="progressbar" data-animate="false"><div class="circle" data-percent="' + data_percent + '><div></div><p>Testing</p></div></div>';
-        var fragment = create(htmltemp);
-        // <div class="progressbar" data-animate="false"><div class="circle" data-percent="100"><div></div><p>Testing</p></div></div>
-        // You can use native DOM methods to insert the fragment:
-        document.body.insertBefore(fragment, document.body.childNodes[0]);
-    }
-    animateElements();
-
-    function create(htmlStr) {
-        var frag = document.createDocumentFragment(),
-            temp = document.createElement('div');
-        temp.innerHTML = htmlStr;
-        //add css
-        var style = document.createElement('link'); 
-        style.href = 'progressbar.css';
-        style.type = 'text/css';
-        style.rel = 'stylesheet';
-        temp.append(style);
-        while (temp.firstChild) {
-            frag.appendChild(temp.firstChild);
-        }
-        return frag;
+        let htmltemp = '<div class="progress rounded-pill"><div role="progressbar" aria-valuenow="' + data_percent + '" aria-valuemin="0" aria-valuemax="100" style="width:' + data_percent + '%" class="progress-bar rounded-pill">' + data_percent +'%</div></div>';
+        metadata.insertAdjacentHTML('afterend', htmltemp);
+        ;
     }
     
-    function animateElements() {
-        $('.progressbar').each(function () {
-            var elementPos = $(this).offset().top;
-            var topOfWindow = $(window).scrollTop();
-            var percent = $(this).find('.circle').attr('data-percent');
-            var percentage = parseInt(percent, 10) / parseInt(100, 10);
-            var animate = $(this).data('animate');
-            if (elementPos < topOfWindow + $(window).height() - 30 && !animate) {
-                $(this).data('animate', true);
-                $(this).find('.circle').circleProgress({
-                    startAngle: -Math.PI / 2,
-                    value: percent / 100,
-                    thickness: 14,
-                    fill: {
-                        color: '#1B58B8'
-                    }
-                }).on('circle-animation-progress', function (event, progress, stepValue) {
-                    $(this).find('div').text((stepValue*100).toFixed(1) + "%");
-                }).stop();
-            }
-        });
-
-    // Show animated elements
-        animateElements();
-        $(window).scroll(animateElements);
-    };
+    
+    
 }
 
