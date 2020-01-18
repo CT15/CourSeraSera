@@ -1,8 +1,6 @@
 main();
 
 function main(){
-
-
     let threadDetails = document.getElementsByClassName('rc-ThreadDetail');
     let threadId = threadDetails[0].childNodes[0].getAttribute('id').trim();
     console.log("The thread ID is ", threadId);
@@ -25,22 +23,25 @@ function main(){
         //rolesArray.push(role);
     } 
 
+    let postData = {
+        id: threadId,
+        textArray: postArray
+    };
     const url = "localhost:5000/predict";
-    let data = JSON.stringify(postArray);
-    function ajaxPost(element) {
-        $.ajax({
-            type:"POST",
-            url: url,
-            data: data,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            error: function() {
-                alert("Error");
-            },
-            success: function() {
-                alert("OK");
-            }
-        });
-    }
+    let data = JSON.stringify(postData);
+    
+    $.ajax({
+        type:"POST",
+        url: url,
+        data: data,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function() {
+            alert("Error");
+        },
+        success: function(data, status) {
+            console.log(data["prediction"]);
+        }
+    });
 }
 
