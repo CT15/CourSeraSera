@@ -32,22 +32,37 @@ function main(){
     } 
     let postData = {
         id: threadId,
-        textArray: postArray
+        posts: postArray
     };
-    const url = "localhost:5000/predict";
     let data = JSON.stringify(postData);
-    var request = new Request(url , {
-        method: 'POST', 
-        data: data,
-        headers: new Headers({
-        'Application-Json': 'text/plain'
+
+    const url = "http://localhost:5000/predict";
+
+    params = {
+        method: "POST", 
+        body: data,
+        // credentials: "include",
+        // mode: 'no-cors',
+        // cache: "no-cache",
+        headers: {
+            "content-type": "application/json"
+            // "Access-Control-Allow-Origin": "*"
+        }
+    };
+
+    fetch(url, params)
+        .then(function(response) {
+            if (response.status !== 200) {
+                console.log(`Looks like there was a problem. Status code: ${response.status}`);
+                return;
+            }
+            response.json().then(function(data) {
+                console.log(data);
+            });
         })
-        
-    });
-    fetch(request).then(function(resp) {
-        console.log('Logging response...')
-        console.log(resp);
-      });
+        .catch(function(error) {
+            console.log("Fetch error: " + error);
+        })
     /*
     $.ajax({
         type:"POST",
