@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<!-- saved from url=(0081)https://developer.chrome.com/extensions/examples/tutorials/get_started/popup.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style>
-      button {
-        height: 30px;
-        width: 30px;
-        outline: none;
-      }
-    </style>
-  </head>
-  <body>
-    <button id="changeColor"></button>
-    <script src="popup.js"></script>
-  
-
-</body></html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="popup.css">
+</head>
+<body>
+  <div class="cd-popup" role="alert">
+	  <div class="cd-popup-container">
+      <div id="not-coursera">
+        <p>This extension only works on <b>Coursera</b></p>
+        <button id="my-btn">Go to Coursera</button>
+      </div>
+      <div id="coursera">
+        <p>Toggle <b>ON</b>/<b>OFF</b></p>
+        <label class="switch">
+          <input type="checkbox" data-toggle-switch="data-toggle-switch"/>    
+          <div onclick="toggleShow()"></div>
+        </label>
+      </div>
+	  </div> <!-- cd-popup-container -->
+  </div> <!-- cd-popup -->
+</body>
+<script src="popup.js"></script>
+</html>

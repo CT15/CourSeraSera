@@ -1,19 +1,31 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 'use strict';
 
-let changeColor = document.getElementById('changeColor');
-chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
-});
-changeColor.onclick = function(element) {
-  let color = element.target.value;
+document.addEventListener("DOMContentLoaded", function() {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.executeScript(
-        tabs[0].id,
-        {code: 'document.body.style.backgroundColor = "' + color + '";'});
+    const coursera = document.getElementById("coursera")
+    const notCoursera = document.getElementById("not-coursera")
+
+    if(tabs[0].url.includes("https://www.coursera.org")) {
+      coursera.style.display = "block"
+      notCoursera.style.display = "none"
+    } else {
+      coursera.style.display = "none";
+      notCoursera.style.display = "block"
+    }
   });
-};
+});
+
+let goToCourseraBtn = document.getElementById("my-btn")
+goToCourseraBtn.onclick = function(element) {
+  chrome.tabs.create({"url": "https://www.coursera.org/"})
+  return false
+}
+
+function toggleShow() {
+  var inputToggle = document.querySelector('[data-toggle-switch]');
+  if (inputToggle.checked === false) {
+    // do something
+  } else {
+    // do other things (might need to send to background)
+  }
+}
