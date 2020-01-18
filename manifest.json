@@ -10,7 +10,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://www.coursera.org/learn/*/discussions/weeks/*"]
+      "matches": ["https://www.coursera.org/learn/*/discussions/weeks/*/threads/*"]
     }
   ],
   "page_action": {
