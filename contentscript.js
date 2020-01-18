@@ -35,7 +35,6 @@ function main(){
         postArray.push(postContent);
     } 
 
-    /*
     let postData = {
         id: threadId,
         posts: postArray
@@ -55,10 +54,8 @@ function main(){
             // "Access-Control-Allow-Origin": "*"
         }
     };
-    */
 
-    let receivedData = [0.5123, 0.1234, 0.2345, 0.8321, 0.9821, 0.2473];
-    /*
+    let receivedData = [];
     fetch(url, params)
         .then(function(response) {
             if (response.status !== 200) {
@@ -67,24 +64,17 @@ function main(){
             }
             response.json().then(function(data) {
                 receivedData = data['prediction'];
-                console.log(data);
+
+                let profileNames = document.getElementsByClassName('rc-ProfileName');
+                for (let i = 0; i < profileNames.length; i++) {
+                    let metadata = profileNames[i].parentElement;
+                    let data_percent = (receivedData[i]*100).toFixed(0);
+                    let htmltemp = '<div class="progress rounded-pill"><div role="progressbar" aria-valuenow="' + data_percent + '" aria-valuemin="0" aria-valuemax="100" style="width:' + data_percent + '%" class="progress-bar rounded-pill">' + data_percent +'%</div></div>';
+                    metadata.insertAdjacentHTML('afterend', htmltemp);
+                }
             });
         })
         .catch(function(error) {
             console.log("Fetch error: " + error);
         });
-    */
-    let profileNames = document.getElementsByClassName('rc-ProfileName');
-    for (let i = 0; i < profileNames.length; i++) {
-        console.log("hello");
-        let metadata = profileNames[i].parentElement;
-        let data_percent = receivedData[i].toFixed(2)*100;
-        let htmltemp = '<div class="progress rounded-pill"><div role="progressbar" aria-valuenow="' + data_percent + '" aria-valuemin="0" aria-valuemax="100" style="width:' + data_percent + '%" class="progress-bar rounded-pill">' + data_percent +'%</div></div>';
-        metadata.insertAdjacentHTML('afterend', htmltemp);
-        ;
-    }
-    
-    
-    
 }
-
