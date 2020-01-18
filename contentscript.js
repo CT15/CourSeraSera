@@ -1,12 +1,6 @@
 console.log('hello');
-var loadfunction = window.onload;
-window.onload = function(event){
-    //enter here the action you want to do once loaded
-    setTimeout(main(), 5000);
-    if(loadfunction) loadfunction(event);
-}
+main();
 function main(){
-
     console.log("in main");
     let threadDetails = document.getElementsByClassName('rc-ThreadDetail');
     console.log(threadDetails[0]);
@@ -30,7 +24,6 @@ function main(){
         postArray.push(postContent);
         //rolesArray.push(role);
     } 
-
     let postData = {
         id: threadId,
         textArray: postArray
